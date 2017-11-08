@@ -1,10 +1,12 @@
 <!DOCTYPE html>
+{% load render_bundle from webpack_loader %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Nabla</title>
 </head>
 <body>
-    <div>Hello from nabla ui</div>
+    <div id="app"></div>
+    {% render_bundle 'main' 'js' %}
 </body>
 </html>

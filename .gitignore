@@ -2,3 +2,5 @@
 *.egg-info
 .idea/
 /node_modules/
+nabla_ui/static/webpack_bundles/*.js
+webpack-stats.json
