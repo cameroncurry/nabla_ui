@@ -1,13 +1,14 @@
 import React, {Component} from 'react'
-
-import NBTable from '../components/NBTable'
+import QTAccessTable from '../components/QTAccessTable'
 
 
 export default class QuestradePage extends Component {
+  
+
   render() {
     return (
       <div>
-        <NBTable />
+        <QTAccessTable />
       </div>
     )
   }
