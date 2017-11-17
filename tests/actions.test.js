@@ -2,7 +2,9 @@ import axios from 'axios'
 import axiosMiddleware from 'redux-axios-middleware'
 import AxiosMockAdapter from 'axios-mock-adapter'
 import configureMockStore from 'redux-mock-store'
+
 import * as actions from '../src/actions'
+import * as actionTypes from '../src/action-types'
 
 
 let axiosClient = axios.create()
@@ -14,7 +16,7 @@ describe('actions', () => {
 
   it('should create fetch qt access action', () => {
     const expectedAction = {
-      type: actions.FETCH_QT_ACCESS,
+      type: actionTypes.FETCH_QT_ACCESS,
       payload: {
         request: {
           url: '/api/qtaccess'
@@ -38,7 +40,7 @@ describe('actions', () => {
     ])
 
     const expectedAction = {
-      type: actions.FETCH_QT_ACCESS,
+      type: actionTypes.FETCH_QT_ACCESS,
       payload: {
         request: {
           url: '/api/qtaccess'
@@ -46,7 +48,7 @@ describe('actions', () => {
       }
     }
 
-    const expectedType = 'FETCH_QT_ACCESS_SUCCESS'
+    const expectedType = actionTypes.FETCH_QT_ACCESS_SUCCESS
     const expectedData = [
       {
         'id': '579d6115-b0f6-4c6c-b9ff-cfc28692d532',

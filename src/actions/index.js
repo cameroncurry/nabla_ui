@@ -1,8 +1,8 @@
 
-export const FETCH_QT_ACCESS = 'FETCH_QT_ACCESS'
+import * as types from '../action-types'
 
 export const fetchQTAccess = () => ({
-  type: FETCH_QT_ACCESS,
+  type: types.FETCH_QT_ACCESS,
   payload: {
     request: {
       url: '/api/qtaccess'
