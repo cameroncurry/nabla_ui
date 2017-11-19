@@ -18,7 +18,7 @@ export const fetchQTAccessFailure = error => ({
 export function fetchQTAccess() {
   return dispatch => {
     dispatch(fetchQTAccessRequest())
-    return axios.get('/api/qt_access').then(response => {
+    return axios.get('/api/qt-access').then(response => {
       dispatch(fetchQTAccessSuccess(response.data))
     }).catch(error => {
       dispatch(fetchQTAccessFailure(error))

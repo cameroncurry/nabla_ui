@@ -14,7 +14,7 @@ describe('actions', () => {
 
   it('should fetch qt access', () => {
     let axiosMock = new AxiosMockAdapter(axios)
-    axiosMock.onGet('/api/qt_access')
+    axiosMock.onGet('/api/qt-access')
       .reply(200, [{
         'id': '579d6115-b0f6-4c6c-b9ff-cfc28692d532',
         'modified': '2000-01-29T12:00:00.000000Z',
