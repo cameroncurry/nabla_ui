@@ -6,8 +6,6 @@ import configureMockStore from 'redux-mock-store'
 import * as actions from '../src/actions'
 import * as actionTypes from '../src/action-types'
 
-import * as endpoints from './nabla-api-mocks'
-
 const middleware = [thunk]
 const mockStore = configureMockStore(middleware)
 
@@ -16,7 +14,15 @@ describe('actions', () => {
 
   it('should fetch qt access', () => {
     let axiosMock = new AxiosMockAdapter(axios)
-    axiosMock.onGet(endpoints.API_QT_ACCESS.endpoint).reply(200, endpoints.API_QT_ACCESS.data)
+    axiosMock.onGet('/api/qtaccess')
+      .reply(200, [{
+        'id': '579d6115-b0f6-4c6c-b9ff-cfc28692d532',
+        'modified': '2000-01-29T12:00:00.000000Z',
+        'scope': 'ACC',
+        'access_token': 'C3lTUKuNQrAAmSD/TPjuV/HI7aNrAwDp',
+        'refresh_token': 'aSBe7wAAdx88QTbwut0tiu3SYic3ox8F',
+        'api_server': 'https://api01.iq.questrade.com/'
+      }])
 
     const expectedActions = [
       {
@@ -24,7 +30,14 @@ describe('actions', () => {
       },
       {
         type: actionTypes.FETCH_QT_ACCESS_SUCCESS,
-        data: endpoints.API_QT_ACCESS.data
+        data: [{
+          'id': '579d6115-b0f6-4c6c-b9ff-cfc28692d532',
+          'modified': '2000-01-29T12:00:00.000000Z',
+          'scope': 'ACC',
+          'access_token': 'C3lTUKuNQrAAmSD/TPjuV/HI7aNrAwDp',
+          'refresh_token': 'aSBe7wAAdx88QTbwut0tiu3SYic3ox8F',
+          'api_server': 'https://api01.iq.questrade.com/'
+        }]
       }
     ]
     const store = mockStore()
