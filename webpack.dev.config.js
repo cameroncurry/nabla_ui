@@ -1,11 +1,11 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const DashboardPlugin = require('webpack-dashboard/plugin')
-const {entry, resolve, webpack_module} = require('./webpack.common.config.js')
+const {resolve, webpack_module} = require('./webpack.common.config.js')
 
 module.exports = {
   context: __dirname,
-  entry,
+  entry: './src/index.dev.js',
   output: {
     path: path.resolve('build'),
     filename: 'bundle.js'
