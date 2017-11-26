@@ -25,3 +25,28 @@ export function fetchQTAccess() {
     })
   }
 }
+
+export const refershQTAccessRequest = () => ({
+  type: types.REFRESH_QT_ACCESS_REQUEST
+})
+
+export const refershQTAccessSuccess = data => ({
+  type: types.REFRESH_QT_ACCESS_SUCCESS,
+  data
+})
+
+export const refershQTAccessFailure = error => ({
+  type: types.REFRESH_QT_ACCESS_FAILURE,
+  error
+})
+
+export function refershQTAccess(id) {
+  return dispatch => {
+    dispatch(refershQTAccessRequest())
+    return axios.put(`/api/qt-access/${id}`).then(response => {
+      dispatch(refershQTAccessSuccess(response.data))
+    }).catch(error => {
+      dispatch(refershQTAccessFailure(error))
+    })
+  }
+}
