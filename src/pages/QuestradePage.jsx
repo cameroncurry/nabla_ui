@@ -2,8 +2,11 @@ import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import {Card, CardHeader} from 'material-ui/Card'
+import AddIcon from 'material-ui/svg-icons/content/add'
+
 import QTAccessTable from '../components/QTAccessTable'
-import {fetchQTAccess} from '../actions'
+import QTAccessDialog from '../components/QTAccessDialog'
+import {fetchQTAccess, qtAccessDialogShow} from '../actions'
 
 const cardStyle = {
   margin: 16
@@ -19,8 +22,14 @@ class QuestradePage extends Component {
     return (
       <div>
         <Card style={cardStyle}>
-          <CardHeader title='Access Tokens' />
-          <QTAccessTable qtaccess={this.props.qtaccess} dispatch={this.props.dispatch}/>
+          <CardHeader title='Access Tokens'
+                      showExpandableButton={true}
+                      openIcon={<AddIcon />}
+                      closeIcon={<AddIcon />}
+                      onClick={() => this.props.dispatch(qtAccessDialogShow())}
+          />
+          <QTAccessDialog open={this.props.qtAccessDialogOpen} dispatch={this.props.dispatch} />
+          <QTAccessTable qtaccess={this.props.qtaccess} dispatch={this.props.dispatch} />
         </Card>
       </div>
     )
@@ -29,13 +38,15 @@ class QuestradePage extends Component {
 
 QuestradePage.propTypes = {
   qtaccess: PropTypes.object.isRequired,
+  qtAccessDialogOpen: PropTypes.bool.isRequired,
   dispatch: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => {
-  const {qtaccess} = state
+  const {qtaccess, view} = state
   return {
-    qtaccess
+    qtaccess,
+    qtAccessDialogOpen: view.qtAccessDialogOpen
   }
 }
 
