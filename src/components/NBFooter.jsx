@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import {grey900} from 'material-ui/styles/colors'
 
 import {ReactIcon} from '../icons/react.icon'
 import {DjangoIcon} from '../icons/django.icon'
@@ -9,7 +10,7 @@ const styles = {
     bottom: 0,
     height: 100,
     width: '100%',
-    backgroundColor: 'rgb(33,33,33)',
+    backgroundColor: grey900,
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center'
