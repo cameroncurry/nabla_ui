@@ -24,6 +24,21 @@ const qtaccess = (state = {
           return entities
         }, {})
       })
+    case types.REFRESH_QT_ACCESS_REQUEST:
+      return Object.assign({}, state, {
+        isFetching: true
+      })
+    case types.REFRESH_QT_ACCESS_FAILURE:
+      return Object.assign({}, state, {
+        isFetching: false
+      })
+    case types.REFRESH_QT_ACCESS_SUCCESS:
+      return Object.assign({}, state, {
+        isFetching: false,
+        entities: Object.assign({}, state.entities, {
+          [action.data.id]: action.data
+        })
+      })
     default:
       return state
   }
