@@ -1,3 +1,5 @@
+export * from './view-actions'
+
 import axios from 'axios'
 import * as types from '../action-types'
 
