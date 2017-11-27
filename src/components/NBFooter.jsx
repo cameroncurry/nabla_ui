@@ -1,8 +1,9 @@
 import React, {Component} from 'react'
 import {grey900} from 'material-ui/styles/colors'
 
-import {ReactIcon} from '../icons/react.icon'
-import {DjangoIcon} from '../icons/django.icon'
+import ReactIcon from '../icons/react.icon'
+import ReduxIcon from '../icons/redux.icon'
+import DjangoIcon from '../icons/django.icon'
 
 const styles = {
   footer: {
@@ -28,8 +29,9 @@ export default class NBFooter extends Component {
       <div>
         <div style={styles.footer}>
           <div style={styles.icons}>
-            <ReactIcon style={{paddingRight: 16}}/>
-            <DjangoIcon style={{paddingLeft: 16}}/>
+            <ReactIcon style={{paddingRight: 24}}/>
+            <ReduxIcon />
+            <DjangoIcon style={{paddingLeft: 24}}/>
           </div>
         </div>
       </div>
