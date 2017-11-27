@@ -25,7 +25,7 @@ const qtaccess = (state = {
         }, {})
       })
     case types.REFRESH_QT_ACCESS_REQUEST:
-      return Object.assign({}. state, {
+      return Object.assign({}, state, {
         isFetching: true
       })
     case types.REFRESH_QT_ACCESS_FAILURE:
@@ -33,7 +33,6 @@ const qtaccess = (state = {
         isFetching: false
       })
     case types.REFRESH_QT_ACCESS_SUCCESS:
-      console.log(action.data, null, 2)
       return Object.assign({}, state, {
         isFetching: false,
         entities: Object.assign({}, state.entities, {
