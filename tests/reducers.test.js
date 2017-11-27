@@ -1,6 +1,6 @@
-import * as actionTypes from '../src/action-types'
+import { combineReducers } from 'redux'
 import * as actions from '../src/actions'
-import nbReducer from '../src/reducers'
+import rootReducer, {qtAccessReducer as qtaccess} from '../src/reducers'
 
 const initialState = {
   qtaccess: {
@@ -10,14 +10,25 @@ const initialState = {
   }
 }
 
+const qtAccessReducer = combineReducers({qtaccess})
+
 describe('reducers', () => {
 
   it('should return inital state', () => {
-    expect(nbReducer(undefined, {})).toEqual(initialState)
+    expect(rootReducer(undefined, {})).toEqual({
+      qtaccess: {
+        isFetching: false,
+        items: [],
+        entities: {}
+      },
+      view: {
+        qtAccessDialogOpen: false
+      }
+    })
   })
 
   it('should handle FETCH_QT_ACCESS_REQUEST', () => {
-    expect(nbReducer(initialState, actions.fetchQTAccessRequest())).toEqual({
+    expect(qtAccessReducer(initialState, actions.fetchQTAccessRequest())).toEqual({
       qtaccess: {
         isFetching: true,
         items: [],
@@ -27,7 +38,7 @@ describe('reducers', () => {
   })
 
   it('should handle FETCH_QT_ACCESS_FAILURE', () => {
-    expect(nbReducer(initialState, actions.fetchQTAccessFailure())).toEqual({
+    expect(qtAccessReducer(initialState, actions.fetchQTAccessFailure())).toEqual({
       qtaccess: {
         isFetching: false,
         items: [],
@@ -53,7 +64,7 @@ describe('reducers', () => {
       'api_server': 'https://api01.iq.questrade.com/'
     }]
     const successAction = actions.fetchQTAccessSuccess(data)
-    expect(nbReducer(undefined, successAction)).toEqual({
+    expect(qtAccessReducer(undefined, successAction)).toEqual({
       qtaccess: {
         isFetching: false,
         items: ['579d6115-b0f6-4c6c-b9ff-cfc28692d532'],
@@ -98,7 +109,7 @@ describe('reducers', () => {
       'api_server': 'https://api01.iq.questrade.com/'
     }
     const successAction = actions.refershQTAccessSuccess(data)
-    expect(nbReducer(state, successAction)).toEqual({
+    expect(qtAccessReducer(state, successAction)).toEqual({
       qtaccess: {
         isFetching: false,
         items: ['579d6115-b0f6-4c6c-b9ff-cfc28692d532'],
