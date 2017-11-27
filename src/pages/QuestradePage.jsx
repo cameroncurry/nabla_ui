@@ -20,7 +20,7 @@ class QuestradePage extends Component {
       <div>
         <Card style={cardStyle}>
           <CardHeader title='Access Tokens' />
-          <QTAccessTable qtaccess={this.props.qtaccess}/>
+          <QTAccessTable qtaccess={this.props.qtaccess} dispatch={this.props.dispatch}/>
         </Card>
       </div>
     )

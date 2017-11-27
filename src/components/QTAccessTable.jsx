@@ -9,8 +9,14 @@ import {Table,
         TableRow,
         TableRowColumn} from 'material-ui/Table'
 
+import * as actions from '../actions'
+
 
 export default class QTAccessTable extends Component {
+
+  refreshQtAccess(id) {
+    this.props.dispatch(actions.refershQTAccess(id))
+  }
 
   render() {
     const tableRows = this.props.qtaccess.items.map(itemId => (
@@ -19,7 +25,9 @@ export default class QTAccessTable extends Component {
         <TableRowColumn>{this.props.qtaccess.entities[itemId].access_token}</TableRowColumn>
         <TableRowColumn>{this.props.qtaccess.entities[itemId].api_server}</TableRowColumn>
         <TableRowColumn>{this.props.qtaccess.entities[itemId].modified}</TableRowColumn>
-        <TableRowColumn><IconButton><RefreshIcon /></IconButton></TableRowColumn>
+        <TableRowColumn>
+          <IconButton onClick={() => this.refreshQtAccess(itemId)}><RefreshIcon /></IconButton>
+        </TableRowColumn>
       </TableRow>
     ))
 
@@ -50,5 +58,6 @@ export default class QTAccessTable extends Component {
 }
 
 QTAccessTable.propTypes = {
-  qtaccess: PropTypes.object.isRequired
+  qtaccess: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired
 }
