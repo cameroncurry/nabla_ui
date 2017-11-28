@@ -4,14 +4,49 @@ import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
 import RaisedButton from 'material-ui/RaisedButton'
 import TextField from 'material-ui/TextField'
+import DropDownMenu from 'material-ui/DropDownMenu'
+import MenuItem from 'material-ui/MenuItem'
 
 import {qtAccessDialogShow, qtAccessDialogHide} from '../actions'
 
+const styles = {
+  dialog: {
+    display: 'flex',
+    flexDirection: 'column'
+  },
+  textField: {
+    paddingLeft: 24
+  }
+}
 
 export default class QTAccessDialog extends Component {
 
-  handleSubmit() {
-    console.log('TODO submit new qt access to backend')
+  constructor(props) {
+    super(props)
+    this.state = {
+      scope: 'ACC',
+      token: ''
+    }
+  }
+
+  handleScopeChange = (event, index, value) => {
+    this.setState({
+      value
+    })
+  }
+
+  handleTokenChange = event => {
+    this.setState({
+      token: event.target.value,
+    })
+  }
+
+  handleSubmit = () => {
+    console.log('TODO submit new qt access to backend', this.state.scope, this.state.token)
+    this.props.dispatch(qtAccessDialogHide())
+  }
+
+  handleClose = () => {
     this.props.dispatch(qtAccessDialogHide())
   }
 
@@ -20,12 +55,12 @@ export default class QTAccessDialog extends Component {
       <FlatButton
         label='Cancel'
         primary={true}
-        onClick={() => this.props.dispatch(qtAccessDialogHide())}
+        onClick={this.handleClose}
       />,
       <FlatButton
         label='Submit'
         primary={true}
-        onClick={this.handleSubmit.bind(this)}
+        onClick={this.handleSubmit}
       />,
     ]
     return (
@@ -34,11 +69,23 @@ export default class QTAccessDialog extends Component {
         actions={actions}
         modal={false}
         open={this.props.open}
-        onRequestClose={() => this.props.dispatch(qtAccessDialogHide())}
+        onRequestClose={this.handleClose}
       >
-        <TextField
-          hintText="Refresh Token"
-        />
+        <div style={styles.dialog}>
+          <div>
+            <DropDownMenu value={this.state.scope} onChange={this.handleScopeChange}>
+              <MenuItem value={'ACC'} primaryText='Account Data' />
+              <MenuItem value={'MKT'} primaryText='Market Data' />
+              <MenuItem value={'ODR'} primaryText='Order Placement' />
+            </DropDownMenu>
+          </div>
+          <TextField 
+            style={styles.textField}
+            value={this.state.token}
+            onChange={this.handleTokenChange}
+            hintText="Refresh Token"
+          />
+        </div>
       </Dialog>
     )
   }
