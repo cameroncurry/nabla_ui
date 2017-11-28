@@ -1,6 +1,34 @@
 import axios from 'axios'
 import * as types from '../action-types'
 
+export const addQTAccessRequest = () => ({
+  type: types.ADD_QT_ACCESS_REQUEST
+})
+
+export const addQTAccessSuccess = (data) => ({
+  type: types.ADD_QT_ACCESS_SUCCESS,
+  data
+})
+
+export const addQTAccessFailure = (error) => ({
+  type: types.ADD_QT_ACCESS_FAILURE,
+  error
+})
+
+export function addQTAccess(scope, refreshToken) {
+  return dispatch => {
+    dispatch(addQTAccessRequest())
+    return axios.post('/api/qt-access', {
+      scope,
+      refresh_token: refreshToken
+    }).then(response => {
+      dispatch(addQTAccessSuccess(response.data))
+    }).catch(error => {
+      dispatch(addQTAccessFailure(error))
+    })
+  }
+}
+
 export const fetchQTAccessRequest = () => ({
   type: types.FETCH_QT_ACCESS_REQUEST
 })
