@@ -7,6 +7,8 @@ import { Provider } from 'react-redux'
 import App from './App.jsx'
 import rootReducer from './reducers'
 
+axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+axios.defaults.xsrfCookieName = "csrftoken";
 axios.defaults.baseURL = 'http://localhost:8000'
 
 const store = createStore(rootReducer, applyMiddleware(thunkMiddleware))
