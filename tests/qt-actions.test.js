@@ -42,7 +42,6 @@ describe('qt actions', () => {
       actions.addQTAccess('579d6115-b0f6-4c6c-b9ff-cfc28692d532','aSBe7wAAdx88QTbwut0tiu3SYic3ox8F')
     ).then(() => {
       expect(store.getActions()).toEqual(expectedActions)
-      console.log(store.getActions())
     })
   })
 
