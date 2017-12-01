@@ -7,7 +7,9 @@ import TextField from 'material-ui/TextField'
 import DropDownMenu from 'material-ui/DropDownMenu'
 import MenuItem from 'material-ui/MenuItem'
 
-import {qtAccessDialogShow, qtAccessDialogHide} from '../actions'
+import {qtAccessDialogShow,
+        qtAccessDialogHide,
+        addQTAccess} from '../actions'
 
 const styles = {
   dialog: {
@@ -42,8 +44,12 @@ export default class QTAccessDialog extends Component {
   }
 
   handleSubmit = () => {
-    console.log('TODO submit new qt access to backend', this.state.scope, this.state.token)
+    this.props.dispatch(addQTAccess(this.state.scope, this.state.token))
     this.props.dispatch(qtAccessDialogHide())
+    this.setState({
+      scope: 'ACC',
+      token: ''
+    })
   }
 
   handleClose = () => {
