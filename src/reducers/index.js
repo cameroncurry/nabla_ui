@@ -8,6 +8,22 @@ export const qtAccessReducer = (state = {
   entities: {}
 }, action) => {
   switch(action.type) {
+    case types.ADD_QT_ACCESS_REQUEST:
+      return Object.assign({}, state, {
+        isFetching: true
+      })
+    case types.ADD_QT_ACCESS_FAILURE:
+      return Object.assign({}, state, {
+        isFetching: false
+      })
+    case types.ADD_QT_ACCESS_SUCCESS:
+      return Object.assign({}, state, {
+        isFetching: false,
+        items: [...state.items, action.data.id],
+        entities: Object.assign({}, state.entities, {
+          [action.data.id]: action.data
+        })
+      })
     case types.FETCH_QT_ACCESS_REQUEST:
       return Object.assign({}, state, {
         isFetching: true
