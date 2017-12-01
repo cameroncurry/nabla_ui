@@ -10,7 +10,40 @@ const middleware = [thunk]
 const mockStore = configureMockStore(middleware)
 
 
-describe('actions', () => {
+describe('qt actions', () => {
+
+  it('should add qt access', () => {
+    let axiosMock = new AxiosMockAdapter(axios)
+    axiosMock.onPost('/api/qt-access')
+      .reply(201, {
+        'id': '579d6115-b0f6-4c6c-b9ff-cfc28692d532',
+        'modified': '2000-01-29T12:00:00.000000Z',
+        'scope': 'ACC',
+        'refresh_token': 'aSBe7wAAdx88QTbwut0tiu3SYic3ox8F'
+      })
+    
+    const expectedActions = [
+      {
+        type: actionTypes.ADD_QT_ACCESS_REQUEST
+      },
+      {
+        type: actionTypes.ADD_QT_ACCESS_SUCCESS,
+        data: {
+          'id': '579d6115-b0f6-4c6c-b9ff-cfc28692d532',
+          'modified': '2000-01-29T12:00:00.000000Z',
+          'scope': 'ACC',
+          'refresh_token': 'aSBe7wAAdx88QTbwut0tiu3SYic3ox8F'
+        }
+      }
+    ]
+
+    const store = mockStore()
+    return store.dispatch(
+      actions.addQTAccess('579d6115-b0f6-4c6c-b9ff-cfc28692d532','aSBe7wAAdx88QTbwut0tiu3SYic3ox8F')
+    ).then(() => {
+      expect(store.getActions()).toEqual(expectedActions)
+    })
+  })
 
   it('should fetch qt access', () => {
     let axiosMock = new AxiosMockAdapter(axios)

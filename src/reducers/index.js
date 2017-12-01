@@ -1,12 +1,29 @@
 import { combineReducers } from 'redux'
 import * as types from '../action-types'
+import {viewReducer} from './view-reducers'
 
-const qtaccess = (state = {
+export const qtAccessReducer = (state = {
   isFetching: false,
   items: [],
   entities: {}
 }, action) => {
   switch(action.type) {
+    case types.ADD_QT_ACCESS_REQUEST:
+      return Object.assign({}, state, {
+        isFetching: true
+      })
+    case types.ADD_QT_ACCESS_FAILURE:
+      return Object.assign({}, state, {
+        isFetching: false
+      })
+    case types.ADD_QT_ACCESS_SUCCESS:
+      return Object.assign({}, state, {
+        isFetching: false,
+        items: [...state.items, action.data.id],
+        entities: Object.assign({}, state.entities, {
+          [action.data.id]: action.data
+        })
+      })
     case types.FETCH_QT_ACCESS_REQUEST:
       return Object.assign({}, state, {
         isFetching: true
@@ -44,8 +61,9 @@ const qtaccess = (state = {
   }
 }
 
-const nbReducer = combineReducers({
-  qtaccess
+const rootReducer = combineReducers({
+  qtaccess: qtAccessReducer,
+  view: viewReducer
 })
 
-export default nbReducer
+export default rootReducer

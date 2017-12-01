@@ -5,11 +5,13 @@ import { createStore, applyMiddleware } from 'redux'
 import thunkMiddleware from 'redux-thunk'
 import { Provider } from 'react-redux'
 import App from './App.jsx'
-import nbReducer from './reducers'
+import rootReducer from './reducers'
 
+axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+axios.defaults.xsrfCookieName = "csrftoken";
 axios.defaults.baseURL = 'http://localhost:8000'
 
-const store = createStore(nbReducer, applyMiddleware(thunkMiddleware))
+const store = createStore(rootReducer, applyMiddleware(thunkMiddleware))
 
 ReactDOM.render(
   <Provider store={store}>
