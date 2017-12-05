@@ -3,11 +3,8 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 import QTAccessTable from '../components/QTAccessTable'
-import {fetchQTAccess, qtAccessDialogShow} from '../actions'
+import {fetchQTAccess} from '../actions'
 
-const cardStyle = {
-  margin: 16
-}
 
 class QuestradePage extends Component {
 

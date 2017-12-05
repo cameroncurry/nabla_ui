@@ -9,9 +9,7 @@ import Dialog, {
   DialogTitle,
 } from 'material-ui/Dialog'
 
-import {qtAccessDialogShow,
-        qtAccessDialogHide,
-        addQTAccess} from '../actions'
+import {qtAccessDialogHide, addQTAccess} from '../actions'
 
 const styles = {
   dialog: {

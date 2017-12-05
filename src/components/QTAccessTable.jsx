@@ -7,11 +7,12 @@ import IconButton from 'material-ui/IconButton'
 import RefreshIcon from 'material-ui-icons/Refresh'
 import { CircularProgress } from 'material-ui/Progress'
 import Card, {CardContent} from 'material-ui/Card'
-import Table,
-       {TableBody,
-        TableHead,
-        TableRow,
-        TableCell} from 'material-ui/Table'
+import Table, {
+  TableBody,
+  TableHead,
+  TableRow,
+  TableCell
+} from 'material-ui/Table'
 
 import * as actions from '../actions'
 import QTAccessDialog from './QTAccessDialog'
