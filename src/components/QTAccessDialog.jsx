@@ -1,11 +1,13 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
-import Dialog from 'material-ui/Dialog'
-import FlatButton from 'material-ui/FlatButton'
-import RaisedButton from 'material-ui/RaisedButton'
+import Button from 'material-ui/Button'
 import TextField from 'material-ui/TextField'
-import DropDownMenu from 'material-ui/DropDownMenu'
-import MenuItem from 'material-ui/MenuItem'
+import {MenuItem} from 'material-ui/Menu'
+import Dialog, {
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+} from 'material-ui/Dialog'
 
 import {qtAccessDialogShow,
         qtAccessDialogHide,
@@ -15,9 +17,6 @@ const styles = {
   dialog: {
     display: 'flex',
     flexDirection: 'column'
-  },
-  textField: {
-    paddingLeft: 24
   }
 }
 
@@ -31,9 +30,9 @@ export default class QTAccessDialog extends Component {
     }
   }
 
-  handleScopeChange = (event, index, value) => {
+  handleScopeChange = event => {
     this.setState({
-      value
+      scope: event.target.value
     })
   }
 
@@ -57,41 +56,40 @@ export default class QTAccessDialog extends Component {
   }
 
   render() {
-    const actions = [
-      <FlatButton
-        label='Cancel'
-        primary={true}
-        onClick={this.handleClose}
-      />,
-      <FlatButton
-        label='Submit'
-        primary={true}
-        onClick={this.handleSubmit}
-      />,
-    ]
     return (
-      <Dialog
-        title='Add Access token'
-        actions={actions}
-        modal={false}
-        open={this.props.open}
-        onRequestClose={this.handleClose}
-      >
-        <div style={styles.dialog}>
-          <div>
-            <DropDownMenu value={this.state.scope} onChange={this.handleScopeChange}>
-              <MenuItem value={'ACC'} primaryText='Account Data' />
-              <MenuItem value={'MKT'} primaryText='Market Data' />
-              <MenuItem value={'ODR'} primaryText='Order Placement' />
-            </DropDownMenu>
-          </div>
-          <TextField 
-            style={styles.textField}
+      <Dialog open={this.props.open} onRequestClose={this.handleClose}>
+        <DialogTitle>Add Access Token</DialogTitle>
+        <DialogContent style={styles.dialog}>
+          <TextField
+            id='select-scope'
+            select
+            label='Scope'
+            value={this.state.scope}
+            onChange={this.handleScopeChange}
+            style={{width:200}}
+          >
+            <MenuItem value={'ACC'}>Account Data</MenuItem>
+            <MenuItem value={'MKT'}>Market Data</MenuItem>
+            <MenuItem value={'ODR'}>Order Placement</MenuItem>
+          </TextField>
+          <TextField
+            autoFocus
+            id='token'
+            margin='normal'
+            label='Refresh Token'
             value={this.state.token}
             onChange={this.handleTokenChange}
-            hintText="Refresh Token"
+            style={{width: 400}}
           />
-        </div>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={this.handleClose} color='primary'>
+            Cancel
+          </Button>
+          <Button onClick={this.handleSubmit} color='primary'>
+            Submit
+          </Button>
+        </DialogActions>
       </Dialog>
     )
   }
