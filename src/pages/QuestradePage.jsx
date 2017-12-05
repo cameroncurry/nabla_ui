@@ -1,11 +1,8 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import {Card, CardHeader} from 'material-ui/Card'
-import AddIcon from 'material-ui/svg-icons/content/add'
 
 import QTAccessTable from '../components/QTAccessTable'
-import QTAccessDialog from '../components/QTAccessDialog'
 import {fetchQTAccess, qtAccessDialogShow} from '../actions'
 
 const cardStyle = {
@@ -21,16 +18,9 @@ class QuestradePage extends Component {
   render() {
     return (
       <div>
-        <Card style={cardStyle}>
-          <CardHeader title='Access Tokens'
-                      showExpandableButton={true}
-                      openIcon={<AddIcon />}
-                      closeIcon={<AddIcon />}
-                      onClick={() => this.props.dispatch(qtAccessDialogShow())}
-          />
-          <QTAccessDialog open={this.props.qtAccessDialogOpen} dispatch={this.props.dispatch} />
-          <QTAccessTable qtaccess={this.props.qtaccess} dispatch={this.props.dispatch} />
-        </Card>
+        <QTAccessTable qtaccess={this.props.qtaccess}
+                       dispatch={this.props.dispatch}
+                       qtAccessDialogOpen={this.props.qtAccessDialogOpen} />
       </div>
     )
   }

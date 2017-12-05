@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {grey900} from 'material-ui/styles/colors'
+import {grey} from 'material-ui/colors'
 
 import ReactIcon from '../icons/react.icon'
 import ReduxIcon from '../icons/redux.icon'
@@ -11,7 +11,7 @@ const styles = {
     bottom: 0,
     height: 100,
     width: '100%',
-    backgroundColor: grey900,
+    backgroundColor: grey[900],
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center'
