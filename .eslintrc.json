@@ -24,8 +24,10 @@
         "indent": [
             "error",
             2,
-            {"SwitchCase": 1,
-            "ignoredNodes": ["JSXAttribute"]}
+            {
+                "SwitchCase": 1,
+                "ignoredNodes": ["JSXAttribute"]
+            }
         ],
         "linebreak-style": [
             "error",
