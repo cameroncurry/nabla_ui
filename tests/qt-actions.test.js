@@ -5,8 +5,9 @@ import configureMockStore from 'redux-mock-store'
 
 import * as actions from '../src/actions'
 import * as actionTypes from '../src/action-types'
+import api from '../src/middleware'
 
-const middleware = [thunk]
+const middleware = [thunk, api]
 const mockStore = configureMockStore(middleware)
 
 
@@ -109,6 +110,31 @@ describe('qt actions', () => {
     ]
     const store = mockStore()
     return store.dispatch(actions.refershQTAccess('579d6115-b0f6-4c6c-b9ff-cfc28692d532')).then(() => {
+      expect(store.getActions()).toEqual(expectedActions)
+    })
+  })
+
+  it('should fetch qt balance', () => {
+    let axiosMock = new AxiosMockAdapter(axios)
+    axiosMock.onGet('/api/qt-balance')
+      .reply(200, {
+        CAD: 12345.60,
+        USD: 12345.60
+      })
+    const expectedActions = [
+      {
+        type: actions.FETCH_QT_BALANCE_REQUEST
+      },
+      {
+        type: actions.FETCH_QT_BALANCE_SUCCESS,
+        data: {
+          CAD: 12345.60,
+          USD: 12345.60
+        }
+      }
+    ]
+    const store = mockStore()
+    return store.dispatch(actions.fetchQTBalance()).then(() => {
       expect(store.getActions()).toEqual(expectedActions)
     })
   })
