@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { API } from '../middleware'
 import * as types from '../action-types'
 
 export const addQTAccessRequest = () => ({
@@ -76,5 +77,18 @@ export function refershQTAccess(id) {
     }).catch(error => {
       dispatch(refershQTAccessFailure(error))
     })
+  }
+}
+
+export const FETCH_QT_BALANCE_REQUEST = 'FETCH_QT_BALANCE_REQUEST'
+export const FETCH_QT_BALANCE_SUCCESS = 'FETCH_QT_BALANCE_SUCCESS'
+export const FETCH_QT_BALANCE_FAILURE = 'FETCH_QT_BALANCE_FAILURE'
+
+export function fetchQTBalance() {
+  return {
+    [API]: {
+      types: [FETCH_QT_BALANCE_REQUEST, FETCH_QT_BALANCE_SUCCESS, FETCH_QT_BALANCE_FAILURE],
+      endpoint: '/api/qt-balance'
+    }
   }
 }
